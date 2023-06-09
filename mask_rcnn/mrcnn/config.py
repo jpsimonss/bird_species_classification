@@ -7,6 +7,7 @@ Licensed under the MIT License (see LICENSE for details)
 Written by Waleed Abdulla
 """
 
+import math
 import numpy as np
 
 
@@ -91,7 +92,7 @@ class Config(object):
     # How many anchors per image to use for RPN training
     RPN_TRAIN_ANCHORS_PER_IMAGE = 256
 
-    # ROIs kept after non-maximum suppression (training and inference)
+    # ROIs kept after non-maximum supression (training and inference)
     POST_NMS_ROIS_TRAINING = 2000
     POST_NMS_ROIS_INFERENCE = 1000
 
@@ -101,7 +102,7 @@ class Config(object):
     MINI_MASK_SHAPE = (56, 56)  # (height, width) of the mini-mask
 
     # Input image resizing
-    # Generally, use the "square" resizing mode for training and predicting
+    # Generally, use the "square" resizing mode for training and inferencing
     # and it should work well in most cases. In this mode, images are scaled
     # up such that the small side is = IMAGE_MIN_DIM, but ensuring that the
     # scaling doesn't make the long side > IMAGE_MAX_DIM. Then the image is
@@ -169,7 +170,7 @@ class Config(object):
 
     # Learning rate and momentum
     # The Mask RCNN paper uses lr=0.02, but on TensorFlow it causes
-    # weights to explode. Likely due to differences in optimizer
+    # weights to explode. Likely due to differences in optimzer
     # implementation.
     LEARNING_RATE = 0.001
     LEARNING_MOMENTUM = 0.9
@@ -197,7 +198,7 @@ class Config(object):
     # Train or freeze batch normalization layers
     #     None: Train BN layers. This is the normal mode
     #     False: Freeze BN layers. Good when using a small batch size
-    #     True: (don't use). Set layer in training mode even when predicting
+    #     True: (don't use). Set layer in training mode even when inferencing
     TRAIN_BN = False  # Defaulting to False since batch size is often small
 
     # Gradient norm clipping
